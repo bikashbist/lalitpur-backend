@@ -1,0 +1,119 @@
+@extends('admin.admin-dashboard')
+
+@section('content')
+<div class="container-fluid">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Edit Service Process</h6>
+        </div>
+        <div class="card-body">
+            <form action="{{ route('admin.service-processes.update', $serviceProcess->id) }}" method="POST">
+                @csrf
+                @method('PUT')
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input type="text" class="form-control" id="title" name="title" 
+                           value="{{ old('title', $serviceProcess->title) }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="introduction">Introduction</label>
+                    <textarea class="form-control" id="introduction" name="introduction" 
+                              rows="3" required>{{ old('introduction', $serviceProcess->introduction) }}</textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label>Services (Ordered List)</label>
+                    <div id="services-container">
+                        @foreach(old('services', $serviceProcess->services) as $service)
+                        <div class="input-group mb-2">
+                            <input type="text" class="form-control" name="services[]" 
+                                   value="{{ $service }}" required>
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-danger remove-item">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        @endforeach
+                        <button type="button" class="btn btn-success add-service">
+                            <i class="fas fa-plus"></i> Add Service
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Required Documents (Unordered List)</label>
+                    <div id="documents-container">
+                        @foreach(old('documents', $serviceProcess->documents) as $document)
+                        <div class="input-group mb-2">
+                            <input type="text" class="form-control" name="documents[]" 
+                                   value="{{ $document }}" required>
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-danger remove-item">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        @endforeach
+                        <button type="button" class="btn btn-success add-document">
+                            <i class="fas fa-plus"></i> Add Document
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="status" 
+                               name="status" {{ old('status', $serviceProcess->status) ? 'checked' : '' }}>
+                        <label class="custom-control-label" for="status">Active</label>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Update</button>
+                <a href="{{ route('admin.service-processes.index') }}" class="btn btn-secondary">Cancel</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Services
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('add-service')) {
+                const newInput = document.createElement('div');
+                newInput.className = 'input-group mb-2';
+                newInput.innerHTML = `
+                    <input type="text" class="form-control" name="services[]" required>
+                    <div class="input-group-append">
+                        <button type="button" class="btn btn-danger remove-item">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                    </div>
+                `;
+                document.getElementById('services-container').insertBefore(newInput, e.target);
+            }
+            
+            // Documents
+            if (e.target.classList.contains('add-document')) {
+                const newInput = document.createElement('div');
+                newInput.className = 'input-group mb-2';
+                newInput.innerHTML = `
+                    <input type="text" class="form-control" name="documents[]" required>
+                    <div class="input-group-append">
+                        <button type="button" class="btn btn-danger remove-item">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                    </div>
+                `;
+                document.getElementById('documents-container').insertBefore(newInput, e.target);
+            }
+            
+            // Remove items
+            if (e.target.classList.contains('remove-item')) {
+                e.target.closest('.input-group').remove();
+            }
+        });
+    });
+</script>
+@endsection

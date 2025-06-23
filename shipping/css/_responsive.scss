@@ -1,0 +1,138 @@
+// Responsive Styles
+
+// Extra small devices (portrait phones, less than 576px)
+@media (max-width: 575.98px) {
+  .section-heading {
+    h2 {
+      font-size: 24px;
+    }
+  }
+  
+  .hero-section {
+    .hero-slide {
+      padding: 50px 0;
+      
+      .hero-content {
+        h1 {
+          font-size: 24px;
+        }
+        
+        p {
+          font-size: 16px;
+        }
+      }
+    }
+  }
+  
+  .about-section {
+    .about-image {
+      margin-bottom: 30px;
+    }
+  }
+  
+  .process-section {
+    .process-timeline {
+      .process-step {
+        padding-left: 50px;
+        
+        .step-number {
+          width: 30px;
+          height: 30px;
+          font-size: 14px;
+        }
+      }
+    }
+  }
+  
+  .cta-section {
+    .cta-content {
+      h2 {
+        font-size: 24px;
+      }
+      
+      p {
+        font-size: 16px;
+      }
+    }
+  }
+}
+
+// Small devices (landscape phones, 576px and up)
+@media (min-width: 576px) and (max-width: 767.98px) {
+  .section-heading {
+    h2 {
+      font-size: 28px;
+    }
+  }
+  
+  .hero-section {
+    .hero-slide {
+      padding: 60px 0;
+      
+      .hero-content {
+        h1 {
+          font-size: 28px;
+        }
+      }
+    }
+  }
+  
+  .about-section {
+    .about-image {
+      margin-bottom: 30px;
+    }
+  }
+}
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .section-heading {
+    h2 {
+      font-size: 32px;
+    }
+  }
+  
+  .hero-section {
+    .hero-slide {
+      .hero-content {
+        h1 {
+          font-size: 32px;
+        }
+      }
+    }
+  }
+  
+  .navbar {
+    .navbar-nav {
+      .nav-item {
+        margin: 0 2px;
+        
+        .nav-link {
+          padding: 10px;
+        }
+      }
+    }
+  }
+}
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  .navbar {
+    .navbar-nav {
+      .nav-item {
+        margin: 0 3px;
+        
+        .nav-link {
+          padding: 10px;
+        }
+      }
+    }
+  }
+}
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1170px;
+  }
+}
